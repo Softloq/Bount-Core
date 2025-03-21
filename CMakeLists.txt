@@ -4,6 +4,10 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
+
 project(Bount-Core)
 
 if(EXISTS "${CMAKE_CURRENT_LIST_DIR}/Custom.cmake")
@@ -24,4 +28,5 @@ set(Bount_Core_INCLUDE_DIRS "${CMAKE_CURRENT_LIST_DIR}/include" ${Boost_INCLUDE_
 file(GLOB_RECURSE Bount_Core_SRC "${CMAKE_CURRENT_LIST_DIR}/src/**.cpp")
 add_library(Bount-Core SHARED ${Bount_Core_SRC})
 add_library(Bount::Core ALIAS Bount-Core)
+target_compile_definitions(Bount-Core PRIVATE BOUNT_CORE_BUILD_API)
 target_include_directories(Bount-Core PUBLIC ${Bount_Core_INCLUDE_DIRS})
