@@ -8,6 +8,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib")
 
+if(NOT TARGET Bount::Core)
 project(Bount-Core)
 
 if(EXISTS "${CMAKE_CURRENT_LIST_DIR}/Custom.cmake")
@@ -31,3 +32,4 @@ add_library(Bount::Core ALIAS Bount-Core)
 target_compile_definitions(Bount-Core PRIVATE BOUNT_CORE_BUILD_API)
 target_compile_definitions(Bount-Core PUBLIC BOUNT_CORE_USE_API)
 target_include_directories(Bount-Core PUBLIC ${Bount_Core_INCLUDE_DIRS})
+endif()
