@@ -11,7 +11,7 @@
 
 #if defined(BOUNT_CORE_BUILD_API)
     #define BOUNT_CORE_API BOUNT_CORE_EXPORT
-#elif defined(_DLL)
+#elif defined(BOUNT_CORE_USE_API)
     #define BOUNT_CORE_API BOUNT_CORE_IMPORT
 #else
     #define BOUNT_CORE_API
