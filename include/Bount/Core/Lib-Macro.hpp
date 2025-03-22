@@ -1,6 +1,8 @@
 #ifndef BOUNT_CORE_LIB_MACRO_HPP
 #define BOUNT_CORE_LIB_MACRO_HPP
 
+#include <SDKDDKVer.h>
+
 #if defined(_DLL)
     #define BOUNT_CORE_EXPORT __declspec(dllexport)
     #define BOUNT_CORE_IMPORT __declspec(dllimport)
