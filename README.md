@@ -2,6 +2,19 @@
 
 The standard headers and libraries used throughout various bount systems.
 
+# Features
+## SVG Parser (port of [svgpp](https://github.com/svgpp/svgpp.git))
+XML/SVG Parsing.
+
+Header-only library.
+
+## Networking Library (port of [boost.asio](https://github.com/boostorg/boost.git))
+Create TCP Server/Client.
+
+Create UDP Server/Client.
+
+Send/Recv Packets.
+
 # Standard
 ## Sized Datatypes:
 
@@ -34,16 +47,3 @@ Characters
 ## Alias Datatypes:
 - `Bount::SizeT`, size_t alias
 - `Bount::ByteT`, char alias
-
-# Features
-## SVG Parser (port of [svgpp](https://github.com/svgpp/svgpp.git))
-XML/SVG Parsing.
-
-Header-only library.
-
-## Networking Library (port of [boost.asio](https://github.com/boostorg/boost.git))
-Create TCP Server/Client.
-
-Create UDP Server/Client.
-
-Send/Recv Packets.
