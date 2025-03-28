@@ -1,3 +1,4 @@
+#include "Bount/Core/Precompiled.hpp"
 #include "Bount/Core/Placeholder.hpp"
 
 namespace Bount::Core
