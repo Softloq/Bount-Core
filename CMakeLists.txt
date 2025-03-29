@@ -42,13 +42,13 @@ if(NOT TARGET Bount::Core)
 
     # Building
     add_library(Bount-Core SHARED ${Bount_Core_SRC})
-    add_dependencies(Bount-Core Copy_Boost_DLLs)
     set_target_properties(Bount-Core PROPERTIES
         LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIG>/lib"
         ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIG>/bin")
     target_compile_definitions(Bount-Core PRIVATE BOUNT_CORE_BUILD_API)
     target_compile_definitions(Bount-Core PUBLIC BOUNT_CORE_USE_API)
     target_include_directories(Bount-Core PUBLIC ${Bount_Core_INCLUDE_DIRS})
+    target_link_libraries(Bount-Core PUBLIC boost::all)
     target_precompile_headers(Bount-Core PRIVATE "${CMAKE_CURRENT_LIST_DIR}/include/Bount/Core/Precompiled.hpp")
     add_library(Bount::Core ALIAS Bount-Core)
 endif()
