@@ -5,5 +5,6 @@
 #include "Bount/Core/Datatypes.hpp"
 #include <iostream>
 #include <string>
+#include <sstream>
 
 #endif
