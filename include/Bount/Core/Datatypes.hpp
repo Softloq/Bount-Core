@@ -4,6 +4,7 @@
 #include "Bount/Core/Lib-Macro.hpp"
 #include <cstdint>
 #include <cctype>
+#include <string>
 
 namespace Bount
 {
@@ -24,12 +25,21 @@ typedef double      F64;
 typedef long double FMaxT;
 
 typedef char     C8;
+typedef char     Char;
+
 typedef char8_t  UC8;
+typedef char8_t  Char8;
+
 typedef char16_t UC16;
+typedef char16_t Char16;
+
 typedef char32_t UC32;
+typedef char32_t Char32;
 
 typedef size_t SizeT;
-typedef char   ByteT;
+typedef char   Byte;
+
+typedef std::string String;
 }
 
 #endif

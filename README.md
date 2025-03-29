@@ -39,11 +39,12 @@ Floating Points
 - `Bount::FMaxT`, Largest Supported Floating Point
 
 Characters
-- `Bount::C8`, 8-bit Signed Character
-- `Bount::UC8`, 8-bit Unsigned Character
-- `Bount::UC16`, at least 16-bit Unsigned Character
-- `Bount::UC32`, at least 32-bit Unsigned Character
+- `Bount::C8` or `Bount::Char`, 8-bit Signed Character
+- `Bount::UC8` or `Bount::Char8`, 8-bit Unsigned Character
+- `Bount::UC16` or `Bount::Char16`, at least 16-bit Unsigned Character
+- `Bount::UC32` or `Bount::Char32`, at least 32-bit Unsigned Character
 
 ## Alias Datatypes:
 - `Bount::SizeT`, size_t alias
-- `Bount::ByteT`, char alias
+- `Bount::Byte`, char alias
+- `Bount::String`, std::string alias
