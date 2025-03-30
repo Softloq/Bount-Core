@@ -32,7 +32,7 @@ if(NOT TARGET Bount::Core)
     find_package(Boost REQUIRED)
 
     # Includes
-    set(Bount_Core_INCLUDE_DIRS "${CMAKE_CURRENT_LIST_DIR}/include" ${Boost_INCLUDE_DIRS} "${CMAKE_CURRENT_LIST_DIR}/svg++/include")
+    set(Bount_Core_INCLUDE_DIRS "${CMAKE_CURRENT_LIST_DIR}/include" ${Boost_INCLUDE_DIRS} "${CMAKE_CURRENT_LIST_DIR}/svg++/include" "${CMAKE_CURRENT_LIST_DIR}/svg++/third_party")
 
     # Sources
     file(GLOB_RECURSE Bount_Core_SRC
