@@ -2,6 +2,12 @@
 
 The standard headers and libraries used throughout various bount systems.
 
+Updating the modules:
+```
+git submodule update --recursive
+git submodule update --init --recursive
+```
+
 # Features
 ## SVG Parser (port of [svgpp](https://github.com/svgpp/svgpp.git))
 XML/SVG Parsing.
