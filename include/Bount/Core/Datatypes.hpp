@@ -1,7 +1,7 @@
 /**
- * file: Datatypes.hpp
- * brief: Standard Datatypes.
- * author: Brandon Foster (Paradox Gene)
+ * @file Datatypes.hpp
+ * @brief Standard Datatypes.
+ * @author Brandon Foster (Paradox Gene)
  */
 
 #ifndef BOUNT_CORE_DATATYPES_HPP

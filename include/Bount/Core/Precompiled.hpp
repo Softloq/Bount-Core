@@ -1,3 +1,9 @@
+/**
+ * @file Precompiled.hpp
+ * @brief Faster compilation for common headers.
+ * @author Brandon Foster (Paradox Gene)
+ */
+
 #ifndef BOUNT_CORE_PRECOMPILED_HPP
 #define BOUNT_CORE_PRECOMPILED_HPP
 
