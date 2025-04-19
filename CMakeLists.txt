@@ -31,7 +31,7 @@ if(NOT TARGET Bount::Core)
     if(NOT EXISTS "${CMAKE_CURRENT_LIST_DIR}/external/boost-${BOOST_VERSION}")
         file(ARCHIVE_EXTRACT INPUT "${CMAKE_CURRENT_LIST_DIR}/external/boost-${BOOST_VERSION}.zip" DESTINATION "${CMAKE_CURRENT_LIST_DIR}/external/boost-${BOOST_VERSION}")
     endif()
-    include("${CMAKE_CURRENT_LIST_DIR}/external/boost-${BOOST_VERSION}/boost/boost.cmake")
+    include("${CMAKE_CURRENT_LIST_DIR}/external/boost-${BOOST_VERSION}/boost/config.cmake")
     cmake_policy(SET CMP0144 NEW)
     find_package(Boost REQUIRED)
 
