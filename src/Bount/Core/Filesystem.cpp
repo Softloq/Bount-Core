@@ -3,8 +3,12 @@
 #include <boost/filesystem.hpp>
 
 #if defined(BOUNT_WINDOWS)
-#include <windows.h>
+#include <windows.h> // For GetModuleFileNameA
+#elif defined(BOUNT_LINUX)
+#include <limits.h> // For PATH_MAX
+#include <unistd.h> // For readlink
 #endif
+
 
 namespace Bount::Filesystem
 {
@@ -57,9 +61,16 @@ BOUNT_CORE_API const String& Path::BaseString(Base base) noexcept
 {
     try
     {
+        // create the bin buffer (OS-Specific)
     #if defined(BOUNT_WINDOWS)
         static char binBuffer[MAX_PATH];
         GetModuleFileNameA(NULL, binBuffer, MAX_PATH);
+    #elif defined(BOUNT_LINUX)
+        static char binBuffer[PATH_MAX];
+        static ssize_t count = readlink("/proc/self/exe", binBuffer, PATH_MAX);
+    #else
+        #error "Not supported yet"
+    #endif
 
         // uses the bin path to define the other paths
 
@@ -82,9 +93,6 @@ BOUNT_CORE_API const String& Path::BaseString(Base base) noexcept
             return resPathString;
         }
         }
-    #else
-        #error "Not supported yet"
-    #endif
     }
     catch (const boost::filesystem::filesystem_error& e)
     {
