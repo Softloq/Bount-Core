@@ -58,11 +58,11 @@ if(BUILD_BOUNT_CORE_EXAMPLES AND (NOT TARGET Bount-Core-Examples))
 
     list(APPEND BOUNT_CORE_EXAMPLES DesignPatterns Subsystem)
     foreach(example ${BOUNT_CORE_EXAMPLES})
-        file(GLOB_RECURSE Bount-Core-Example-${example}-SRC
+        file(GLOB_RECURSE BOUNT_CORE_EXAMPLE_${example}_SRC
             "${CMAKE_CURRENT_LIST_DIR}/examples/${example}/src/**.cpp"
             "${CMAKE_CURRENT_LIST_DIR}/examples/${example}/src/**.cxx"
             "${CMAKE_CURRENT_LIST_DIR}/examples/${example}/src/**.cc")
-        add_executable(Bount-Core-Example-${example} ${Bount-Core-Example-${example}-SRC})
+        add_executable(Bount-Core-Example-${example} ${BOUNT_CORE_EXAMPLE_${example}_SRC})
         set_target_properties(Bount-Core-Example-${example} PROPERTIES
             RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIG>/examples"
             RUNTIME_OUTPUT_DIRECTORY_DEBUG "${CMAKE_BINARY_DIR}/$<CONFIG>/examples"
