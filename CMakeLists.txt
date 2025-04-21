@@ -4,6 +4,8 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+option(BOUNT_CORE_EXAMPLES "BUILD BOUNT CORE EXAMPLES" OFF)
+
 set(CMAKE_CONFIGURATION_TYPES "Debug" "Development" "Release" "RelWithDebInfo" "MinSizeRel")
 foreach(config ${CMAKE_CONFIGURATION_TYPES})
     string(TOUPPER ${config} UPPER_config)
@@ -63,4 +65,27 @@ if(NOT TARGET Bount::Core)
     target_link_libraries(Bount-Core PUBLIC boost::all)
     target_precompile_headers(Bount-Core PRIVATE "${CMAKE_CURRENT_LIST_DIR}/include/Bount/Core/Precompiled.hpp")
     add_library(Bount::Core ALIAS Bount-Core)
+endif()
+
+if(BOUNT_CORE_EXAMPLES)
+    if(NOT TARGET Bount-Core-Example-design-patterns)
+        list(APPEND bount-core-examples design-patterns subsystem)
+        foreach(example_name ${bount-core-examples})
+            add_executable(Bount-Core-Example-${example_name}  "${CMAKE_CURRENT_LIST_DIR}/examples/${example_name}/src/main.cpp")
+            set_target_properties(Bount-Core-Example-${example_name} PROPERTIES
+                RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/$<CONFIG>/examples"
+                RUNTIME_OUTPUT_DIRECTORY_DEBUG "${CMAKE_BINARY_DIR}/$<CONFIG>/examples"
+                RUNTIME_OUTPUT_DIRECTORY_RELEASE "${CMAKE_BINARY_DIR}/$<CONFIG>/examples"
+                OUTPUT_NAME "${example_name}")
+            target_include_directories(Bount-Core-Example-${example_name} PRIVATE "${CMAKE_CURRENT_LIST_DIR}/examples/${example_name}/include")
+            target_link_libraries(Bount-Core-Example-${example_name} PRIVATE Bount::Core)
+        endforeach()
+        
+        add_custom_command(
+            TARGET Bount-Core-Example-design-patterns
+            POST_BUILD
+            DEPENDS "${CMAKE_CURRENT_LIST_DIR}/__run_always"
+            COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different "${CMAKE_BINARY_DIR}/$<CONFIG>/bin" "${CMAKE_BINARY_DIR}/$<CONFIG>/examples"
+        )
+    endif()
 endif()

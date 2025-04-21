@@ -14,8 +14,18 @@
 
 namespace Bount
 {
+// Boolean alias
+typedef bool Bool;
+
+// Boolean size aliases
+
 typedef bool B8;
 static_assert(sizeof(B8) == 1, "Datatype B8 must be 1 byte.");
+
+// Unsigned Integer alias
+typedef uint32_t Unsigned;
+
+// Unsigned Integer size aliases
 
 typedef uint8_t  U8;
 typedef uint16_t U16;
@@ -26,6 +36,11 @@ static_assert(sizeof(U16) == 2, "Datatype U16 must be 2 bytes.");
 static_assert(sizeof(U32) == 4, "Datatype U32 must be 4 bytes.");
 static_assert(sizeof(U64) == 8, "Datatype U64 must be 8 bytes.");
 
+// Integer alias
+typedef int32_t Signed;
+
+// Integer size aliases
+
 typedef int8_t  I8;
 typedef int16_t I16;
 typedef int32_t I32;
@@ -35,6 +50,14 @@ static_assert(sizeof(I16) == 2, "Datatype I16 must be 2 bytes.");
 static_assert(sizeof(I32) == 4, "Datatype I32 must be 4 bytes.");
 static_assert(sizeof(I64) == 8, "Datatype I64 must be 8 bytes.");
 
+// Float alias
+typedef float Float;
+
+// Double alias
+typedef double Double;
+
+// Float size aliases
+
 typedef float  F32;
 typedef double F64;
 static_assert(sizeof(F32) == 4, "Datatype F32 must be 4 bytes.");
@@ -43,10 +66,13 @@ static_assert(sizeof(F64) == 8, "Datatype F64 must be 8 bytes.");
 typedef long double FMax;
 static_assert(sizeof(FMax) >= sizeof(F64), "Datatype FMax must be greater than or equal to F64.");
 
-typedef char C8;
+// Char alias
 typedef char Char;
+
+// Char size aliases
+
+typedef char C8;
 static_assert(sizeof(C8)   == 1, "Datatype C8 must be 1 byte.");
-static_assert(sizeof(Char) == 1, "Datatype Char must be 1 byte.");
 
 typedef char8_t UC8;
 typedef char8_t Char8;
@@ -63,10 +89,14 @@ typedef char32_t Char32;
 static_assert(sizeof(UC32)   == 4, "Datatype UC32 must be 4 bytes.");
 static_assert(sizeof(Char32) == 4, "Datatype Char32 must be 4 bytes.");
 
+// Single byte alias
 typedef char Byte;
 static_assert(sizeof(Byte) == 1, "Datatype Byte must be 1 byte.");
 
+// Size Type alias
 typedef size_t SizeT;
+
+// String alias
 typedef std::string String;
 }
 
