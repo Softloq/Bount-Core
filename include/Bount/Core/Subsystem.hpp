@@ -23,8 +23,14 @@ class SubsystemBase : DesignPattern::SingletonBase<T>
 
 public:
     SubsystemBase()
-        : _startingUp(false), _started(false), _shuttingDown(false)
+        : _startingUp(false)
+        , _started(false)
+        , _shuttingDown(false)
     {
+    }
+    ~SubsystemBase()
+    {
+        shutdown();
     }
 
     /** @brief Starts up the Subsystem. */
@@ -40,6 +46,8 @@ public:
         catch (const std::exception& ex)
         {
             _startingUp = false;
+            std::cerr << ex.what() << "\n";
+            onShutdown();
             throw ex;
         }
         if (_startingUp) _started = true;
@@ -78,7 +86,6 @@ public:
 protected:
     virtual void onStartup() = 0;
     virtual void onShutdown() = 0;
-
 };
 
 /** @brief Final behavior extension for a subsystem.*/
