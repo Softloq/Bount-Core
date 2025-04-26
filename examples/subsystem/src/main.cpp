@@ -1,29 +1,34 @@
-#include <Bount/Core/DesignPatterns.hpp>
-#include <Bount/Core/Subsystem.hpp>
-#include <iostream>
+#include <Bount/Subsystem/Generic.hpp>
+
+import Bount.Subsystem;
 
 using namespace Bount;
-using namespace Bount::DesignPattern;
 
 // Describes the independent functionality of this subsystem.
-class ExampleSubsystem_ final : public SubsystemBase<ExampleSubsystem_>
+class Example final : public Subsystem::Generic<Example>
 {
+    Example() noexcept = default;
+    ~Example() noexcept = default;
+
 public:
+    friend class Subsystem::Generic<Example>;
+    friend class Singleton::Generic<Example>;
+
     void onStartup() override
     {
         std::cout << "Started Example Subsystem" << std::endl;
     }
-    void onShutdown() override
+    void onShutdown() noexcept override
     {
         std::cout << "Shutdown Example Subsystem" << std::endl;
-    }
+    } 
 };
-// Properly extends the behavior to a Bount Framework Subsystem.
-using ExampleSubsystem = Subsystem<ExampleSubsystem_>; // Use ExampleSubsystem throughout your codebase.
+
+Example& Singleton::Generic<Example>::getInstance() noexcept { BOUNT_SINGLETON_GET_INSTANCE_IMPL(Example); }
 
 int main(int argc, char* argv[])
 {
-    ExampleSubsystem::getInstance().startup();
-    ExampleSubsystem::getInstance().shutdown();
+    Example::getInstance().startup();
+    Example::getInstance().shutdown();
     return 0;
 }

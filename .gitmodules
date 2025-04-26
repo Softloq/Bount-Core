@@ -1,4 +1,4 @@
 [submodule "svg++"]
-	path = svg++
+	path = .module/svg++
 	url = https://github.com/svgpp/svgpp.git
 	ignore = dirty

@@ -1,22 +1,22 @@
 #include "Bount/Core/Precompiled.hpp"
-#include "Bount/Core/Filesystem.hpp"
 #include <boost/filesystem.hpp>
 
-#if defined(BOUNT_WINDOWS)
-#include <windows.h> // For GetModuleFileNameA
-#elif defined(BOUNT_LINUX)
-#include <limits.h> // For PATH_MAX
-#include <unistd.h> // For readlink
-#endif
+import Bount.Filesystem;
 
+#if defined(BOUNT_WINDOWS)
+    #include <windows.h> // For GetModuleFileNameA
+#elif defined(BOUNT_LINUX)
+    #include <limits.h> // For PATH_MAX
+    #include <unistd.h> // For readlink
+#endif
 
 namespace Bount::Filesystem
 {
-BOUNT_CORE_API Path::Path(Base base, const String& relPath) noexcept
+Path::Path(Base base, const String& relPath) noexcept
 {
     setPath(base, relPath);
 }
-BOUNT_CORE_API void Path::setPath(Base base, const String& relPath) noexcept
+void Path::setPath(Base base, const String& relPath) noexcept
 {
     try
     {
@@ -29,7 +29,7 @@ BOUNT_CORE_API void Path::setPath(Base base, const String& relPath) noexcept
     #endif
     }
 }
-BOUNT_CORE_API String Path::toString() const noexcept
+String Path::toString() const noexcept
 {
     try
     {
@@ -43,7 +43,7 @@ BOUNT_CORE_API String Path::toString() const noexcept
     }
     return "";
 }
-BOUNT_CORE_API Path::operator String() const noexcept
+Path::operator String() const noexcept
 {
     try
     {
@@ -57,7 +57,7 @@ BOUNT_CORE_API Path::operator String() const noexcept
     }
     return "";
 }
-BOUNT_CORE_API const String& Path::BaseString(Base base) noexcept
+const String& Path::BaseString(Base base) noexcept
 {
     try
     {

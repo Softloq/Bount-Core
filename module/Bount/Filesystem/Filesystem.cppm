@@ -1,16 +1,15 @@
 /**
- * @file Filesystem.hpp
- * @brief Standard Filesystem sublibrary.
+ * @file Filesystem.cppm
+ * @brief Standard Filesystem Library Module.
  * @author Brandon Foster (Paradox Gene)
  */
-
-#ifndef BOUNT_CORE_FILESYSTEM_HPP
-#define BOUNT_CORE_FILESYSTEM_HPP
+module;
 
 #include "Bount/Core/Datatypes.hpp"
 #include <boost/filesystem.hpp>
 
-namespace Bount::Filesystem
+export module Bount.Filesystem;
+export namespace Bount::Filesystem
 {
 /** @brief Standard Filesystem Path class manages path strings. */
 class Path
@@ -55,5 +54,3 @@ public:
     BOUNT_CORE_API static const String& BaseString(Base base) noexcept;
 };
 }
-
-#endif
