@@ -36,7 +36,10 @@ if(NOT TARGET Bount-Core-Library)
             $<$<OR:$<CXX_COMPILER_ID:GNU>,$<CXX_COMPILER_ID:Clang>>:-Wno-return-stack-address>
             $<$<CXX_COMPILER_ID:MSVC>:/wd4172 /wd4101>
     )
-    target_include_directories(Bount-Core PUBLIC "${CMAKE_CURRENT_LIST_DIR}/.module/svg++/include")
+    target_include_directories(Bount-Core
+        PUBLIC
+            "${CMAKE_CURRENT_LIST_DIR}/.module/svg++/include"
+            "${CMAKE_CURRENT_LIST_DIR}/.module/svg++/third_party")
     target_link_libraries(Bount-Core PUBLIC boost::all)
     target_boost_link_libraries(Bount-Core boost_filesystem)
     set_bount_library_api_macros(Bount-Core BOUNT_CORE)
