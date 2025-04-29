@@ -74,7 +74,7 @@ const String& Path::BaseString(Base base) noexcept
 
         // uses the bin path to define the other paths
 
-        static boost::filesystem::path binPath = boost::filesystem::absolute(boost::filesystem::path(binBuffer));
+        static boost::filesystem::path binPath = boost::filesystem::absolute(boost::filesystem::path(binBuffer)).parent_path();
         static String binPathString = binPath.string();
         
         switch(base)
