@@ -92,6 +92,27 @@ macro(set_bount_example_common_properties TargetName ExeName)
     endforeach()
 endmacro()
 
+macro(set_bount_test_common_properties TargetName ExeName)
+    set(CMAKE_CONFIGURATION_TYPES "Debug" "Development" "Release" "RelWithDebInfo" "MinSizeRel")
+    foreach(config ${CMAKE_CONFIGURATION_TYPES})
+        string(TOUPPER ${config} UPPER_CONFIG)
+        set_target_properties(${TargetName} PROPERTIES
+            RUNTIME_OUTPUT_DIRECTORY_${UPPER_CONFIG} "${CMAKE_BINARY_DIR}/$<CONFIG>/Bin"
+            OUTPUT_NAME "${ExeName}-Test"
+        )
+    endforeach()
+endmacro()
+
+macro(create_bount_directories AttachTargetName)
+    if(NOT TARGET Create-Bount-Directories)
+        add_custom_target(Create-Bount-Directories
+            COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_BINARY_DIR}/$<CONFIG>/Bin"
+            COMMAND ${CMAKE_COMMAND} -E make_directory "${CMAKE_BINARY_DIR}/$<CONFIG>/Resources"
+        )
+        add_dependencies(${AttachTargetName} Create-Bount-Directories)
+    endif()
+endmacro()
+
 macro(copy_bount_resources TargetName AttachTargetName)
     add_custom_target(${TargetName} COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different "${COMMANDS_CURRENT_LIST_DIR}/../resources" "${CMAKE_BINARY_DIR}/$<CONFIG>/Resources")
     add_dependencies(${AttachTargetName} ${TargetName})
@@ -110,3 +131,14 @@ function(set_bount_library_api_macros TargetName)
         PUBLIC  ${USE_API_MACROS}
     )
 endfunction()
+
+macro(fetch_googletest)
+    # --- Fetch and Configure Google Test ---
+    include(FetchContent)
+    FetchContent_Declare(
+        googletest
+        GIT_REPOSITORY https://github.com/google/googletest.git
+        GIT_TAG        v1.16.0
+    )
+    FetchContent_MakeAvailable(googletest)
+endmacro()

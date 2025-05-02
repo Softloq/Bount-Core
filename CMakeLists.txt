@@ -3,6 +3,8 @@ project(Bount-Core-Project LANGUAGES CXX)
 
 option(BUILD_BOUNT_CORE_EXAMPLES "BUILD BOUNT CORE EXAMPLES" OFF)
 option(BUILD_BOUNT_EXAMPLES "BUILD ALL BOUNT EXAMPLES" OFF)
+option(BUILD_BOUNT_CORE_TESTS "BUILD BOUNT CORE TESTS" OFF)
+option(BUILD_BOUNT_TESTS "BUILD ALL BOUNT TESTS" OFF)
 
 include("${CMAKE_CURRENT_LIST_DIR}/.cmake/config.cmake")
 
@@ -39,12 +41,14 @@ if(NOT TARGET Bount-Core-Library)
     target_include_directories(Bount-Core
         PUBLIC
             "${CMAKE_CURRENT_LIST_DIR}/.module/svg++/include"
-            "${CMAKE_CURRENT_LIST_DIR}/.module/svg++/third_party")
+            "${CMAKE_CURRENT_LIST_DIR}/.module/svg++/third_party"
+    )
     target_link_libraries(Bount-Core PUBLIC boost::all)
     target_boost_link_libraries(Bount-Core boost_filesystem)
     set_bount_library_api_macros(Bount-Core BOUNT_CORE)
     set_bount_library_common_properties(Bount-Core)
     add_library(Bount::Core ALIAS Bount-Core)
+    create_bount_directories(Copy-Boost-DLLs)
     copy_bount_resources(Bount-Core-Resources Bount-Core)
 endif()
 
@@ -64,4 +68,27 @@ if((BUILD_BOUNT_CORE_EXAMPLES OR BUILD_BOUNT_EXAMPLES) AND (NOT TARGET Bount-Cor
         target_link_libraries(Bount-Core-Example-${example} PRIVATE Bount::Core)
         set_bount_example_common_properties(Bount-Core-Example-${example} ${example})
     endforeach()
+endif()
+
+if(BUILD_BOUNT_CORE_TESTS AND (NOT TARGET Bount-Core-Tests))
+    project(Bount-Core-Tests)
+    
+    fetch_googletest()
+    
+    list(APPEND BOUNT_CORE_TESTS Filesystem Singleton Subsystem)
+    foreach(unit-test ${BOUNT_CORE_TESTS})
+        file(GLOB_RECURSE BOUNT_CORE_TESTS_${unit-test}_SRC
+            "${CMAKE_CURRENT_LIST_DIR}/tests/${unit-test}/src/**.cc"
+            "${CMAKE_CURRENT_LIST_DIR}/tests/${unit-test}/src/**.cxx"
+            "${CMAKE_CURRENT_LIST_DIR}/tests/${unit-test}/src/**.c++"
+            "${CMAKE_CURRENT_LIST_DIR}/tests/${unit-test}/src/**.cpp"
+        )
+        add_executable(Bount-Core-Test-${unit-test} ${BOUNT_CORE_TESTS_${unit-test}_SRC})
+        target_include_directories(Bount-Core-Test-${unit-test} PRIVATE "${CMAKE_CURRENT_LIST_DIR}/tests/${unit-test}/include")
+        target_link_libraries(Bount-Core-Test-${unit-test} PRIVATE Bount::Core GTest::gtest_main)
+        set_bount_test_common_properties(Bount-Core-Test-${unit-test} ${unit-test})
+    endforeach()
+
+    enable_testing()
+
 endif()

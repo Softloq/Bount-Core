@@ -2,3 +2,7 @@
 /.cache
 /build
 /.env.cmake
+
+/act
+/act.exe
+/.actrc
