@@ -7,29 +7,29 @@ import Bount.Filesystem.Dir;
 namespace Bount::Filesystem
 {
 Dir::Dir(const Path& path) noexcept
-{
-
-}
-Dir::Dir(Path&& path) noexcept
+: _path(path)
 {
 
 }
 
 Bool Dir::exists() const noexcept
 {
-    return false;
+    return _path.isDir();
 }
 void Dir::create() noexcept
 {
-
+    boost::filesystem::create_directory(_path.toString());
 }
 void Dir::remove() noexcept
 {
-
+    if (_path.isDir())
+    {
+        boost::filesystem::remove(_path.toString());
+    }
 }
 void Dir::change(const Path& path) noexcept
 {
-
+    _path = path;
 }
 
 std::vector<File> Dir::files() const noexcept
